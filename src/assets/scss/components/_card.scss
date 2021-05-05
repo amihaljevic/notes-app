@@ -1,0 +1,29 @@
+.card {
+    --primary-color: #B90445;
+    --bg-color: #FDFDFD;
+    --box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+    --border-radius: 10px;
+    --padding: 20px 22px 17px 16px;
+
+    max-width: 200px;
+    min-height: 150px;
+    max-height: 200px;
+    border-radius: var(--border-radius);
+    background-color: var(--bg-color);
+    box-shadow: var(--box-shadow);
+    padding: var(--padding);
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: border .4s ease;
+
+    &:hover {
+        border: 3px solid var(--primary-color);
+    }
+
+    &--new {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--primary-color);
+    }
+}

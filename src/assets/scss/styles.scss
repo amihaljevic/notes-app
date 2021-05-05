@@ -1,0 +1,31 @@
+/*
+    CSS styles for ReRoot Tech 2020 application.
+*/
+
+// This is the main root file for importing all styles and this is only SCSS file that will be compiled to CSS.
+// Take care of the order of the import statements.
+
+// Themes import
+// @import "themes/_themes.scss";
+
+// // Abstracts import
+// @import "abstracts/_abstracts";
+
+// // Base import
+@import "base/_base";
+
+// Components import
+@import "components/_components";
+
+// Layouts import
+@import "layouts/_layouts";
+
+// // Utils import
+// @import "utils/_utils";
+
+// // Pages import
+// @import "pages/_pages";
+
+/*
+    End off application styles
+*/
