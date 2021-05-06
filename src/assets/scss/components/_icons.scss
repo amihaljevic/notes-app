@@ -1,18 +1,14 @@
 .icon {
+    --primary-color: #B90445;
+
+    cursor: pointer;
+
     &--add {
         content: url("../../icons/add-icon.svg");
     }
 
-    &--edit {
-        content: url("../../icons/edit-icon.svg");
-    }
-
-    &--delete {
-        content: url("../../icons/delete-icon.svg");
-    }
-
-    &--back {
-        content: url("../../icons/back-icon.svg");
+    &:hover {
+        fill: var(--primary-color);
     }
 
     &--lg {
