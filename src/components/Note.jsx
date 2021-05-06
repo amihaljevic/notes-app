@@ -1,11 +1,11 @@
 const Note = ( props ) =>
 {
-    const { isAddNew, onAddNote, title, body, lastModified, openModal } = props;
+    const { isAddNew, onAddNote, title, body, lastModified, openModal, onClick } = props;
 
     if ( isAddNew )
     {
         return (
-            <article className="card card--new" onClick={ onAddNote }>
+            <article className="card card--new" onClick={ onClick }>
                 <span className="icon--add icon--lg"></span>
             </article>
         );

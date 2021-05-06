@@ -1,26 +1,28 @@
 import Note from "./Note";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import uuid from "react-uuid";
 import Modal from "../components/Modal";
 
 const NotesList = ( props ) =>
 {
-    const [ notes, setNotes ] = useState( [] );
+    const [ notes, setNotes ] = useState(
+        localStorage.notes ? JSON.parse( localStorage.notes ) : []
+    );
     const [ activeNote, setActiveNote ] = useState( "" );
     const [ isModalOpen, setIsModalOpen ] = useState( false );
     const [ isAddNewNoteModal, setIsAddNewNoteModal ] = useState( false );
+
+    useEffect( () =>
+    {
+        localStorage.setItem( "notes", JSON.stringify( notes ) );
+    }, [ notes ] );
 
     console.log( notes );
 
     const handleAddNote = () =>
     {
-        setIsAddNewNoteModal( true );
-        setIsModalOpen( !isModalOpen );
-
         const newNote = {
             id: uuid(),
-            title: "This is a note",
-            // subtitle: "Subtitle",
             body: "This is a body of a note",
             lastModified: Date.now()
         };
@@ -30,12 +32,32 @@ const NotesList = ( props ) =>
         console.log( notes );
     };
 
+    const onUpdateNote = ( updatedNote ) =>
+    {
+        const updatedNotesArray = notes.map( note =>
+        {
+            if ( note.id === activeNote )
+            {
+                return updatedNote;
+            }
+            return note;
+        } );
+
+        setNotes( updatedNotesArray );
+    }
+
     const deleteNote = ( noteId ) =>
     {
         setNotes( notes.filter( note => note.id !== noteId ) );
         console.log( 'delete note' );
         closeModal();
     };
+
+    const openAddModal = () =>
+    {
+        setIsAddNewNoteModal( true );
+        setIsModalOpen( !isModalOpen );
+    }
 
     const openModal = ( item ) =>
     {
@@ -54,7 +76,7 @@ const NotesList = ( props ) =>
     return (
         <>
             <article className="grid">
-                <Note isAddNew={ true } onAddNote={ handleAddNote } />
+                <Note isAddNew={ true } onClick={ openAddModal } />
 
                 { notes !== null && notes.length > 0
                     ? notes.map( ( note ) =>
@@ -79,6 +101,8 @@ const NotesList = ( props ) =>
                 deleteNote={ deleteNote }
                 activeNote={ activeNote }
                 isAddNew={ isAddNewNoteModal }
+                onUpdateNote={ onUpdateNote }
+                addNote={ handleAddNote }
             />
         </>
     );
